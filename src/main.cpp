@@ -1,7 +1,4 @@
-
-
 #include "raylib.h"
-
 #include "resource_dir.h" // utility header for SearchAndSetResourceDir
 
 int main() {
@@ -11,8 +8,8 @@ int main() {
   // Create the window and OpenGL context
   InitWindow(640, 480, "Hello Raylib");
 
-  // Utility function from resource_dir.h to find the resources folder and set
-  // it as the current working directory so we can load from it
+  // Utility function from resource_dir.h to find the resources folder and
+  // set it as the current working directory so we can load from it
   SearchAndSetResourceDir("resources");
 
   // Load a texture from the resources directory
