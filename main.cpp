@@ -62,6 +62,11 @@ int main() {
   std::vector<std::vector<int>> grid = {{}, {}};
   std::vector<Vector2> snake;
   std::vector<Vector2> starting_pos = {{200, 200}, {240, 200}, {280, 200}};
+  /*int gridx_size = grid.at(0).size();*/
+  /*int gridy_size = grid.at(1).size();*/
+  /*float randx_pos = static_cast<float>(rand() % gridx_size);*/
+  /*float randy_pos = static_cast<float>(rand() % gridx_size);*/
+  /*Vector2 food_pos = {randx_pos, randy_pos};*/
 
   for (auto position : starting_pos) {
     Vector2 pos = position;
@@ -98,7 +103,9 @@ int main() {
 
     UpdateTimer(&move_timer);
     if (TimerDone(&move_timer)) {
-      for (int i{1}; i < snake.size(); i++) {
+      std::cout << static_cast<int>(snake.size() - 1) << "\n";
+      for (int i{static_cast<int>(snake.size() - 1)}; i > 0; i--) {
+        std::cout << i << "\n";
         snake.at(i) = snake.at(i - 1);
       }
       snake.at(0) = Vector2Add(snake.at(0), Vector2Scale(direction, 40));
@@ -106,9 +113,11 @@ int main() {
     }
 
     for (auto segment : snake) {
-      /*segment = Vector2Clamp(segment, grid_min, grid_max);*/
+      segment = Vector2Clamp(segment, grid_min, grid_max);
       DrawRectangleV(segment, size, WHITE);
     }
+
+    /*DrawRectangleV(food_pos, size, RED);*/
 
     DrawGrid(grid);
 
