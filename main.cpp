@@ -54,7 +54,7 @@ int main() {
   SetTargetFPS(120);
 
   Timer move_timer{};
-  Vector2 direction{0, 0};
+  Vector2 direction{0, 1};
   Vector2 size{40, 40};
   Vector2 grid_min{0, 0};
   Vector2 grid_max{680, 520};
@@ -62,11 +62,6 @@ int main() {
   std::vector<std::vector<int>> grid = {{}, {}};
   std::vector<Vector2> snake;
   std::vector<Vector2> starting_pos = {{200, 200}, {240, 200}, {280, 200}};
-  /*int gridx_size = grid.at(0).size();*/
-  /*int gridy_size = grid.at(1).size();*/
-  /*float randx_pos = static_cast<float>(rand() % gridx_size);*/
-  /*float randy_pos = static_cast<float>(rand() % gridx_size);*/
-  /*Vector2 food_pos = {randx_pos, randy_pos};*/
 
   for (auto position : starting_pos) {
     Vector2 pos = position;
@@ -80,6 +75,13 @@ int main() {
   for (std::size_t i = 0; i < 520; i += 40) {
     grid[1].push_back(i);
   }
+
+  int gridx_size = grid.at(0).size();
+  int gridy_size = grid.at(1).size();
+  float randx_pos = static_cast<float>(rand() % gridx_size);
+  float randy_pos = static_cast<float>(rand() % gridx_size);
+  Vector2 food_pos = {static_cast<float>(grid.at(0).at(randx_pos)),
+                      static_cast<float>(grid.at(1).at(randy_pos))};
 
   while (!WindowShouldClose()) {
     if (IsKeyDown(KEY_W)) {
@@ -117,7 +119,9 @@ int main() {
       DrawRectangleV(segment, size, WHITE);
     }
 
-    /*DrawRectangleV(food_pos, size, RED);*/
+    std::cout << food_pos.x << "," << food_pos.y << "\n";
+
+    DrawRectangleV(food_pos, size, RED);
 
     DrawGrid(grid);
 
